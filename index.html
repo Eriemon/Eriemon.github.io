@@ -19,12 +19,12 @@
                 <span class="logo-bracket">]</span>
             </a>
             <div class="nav-links">
-                <a href="#about">About Me</a>
-                <a href="#publications">Publications</a>
-                <a href="#projects">Projects</a>
-                <a href="#news">News</a>
-                <a href="#experience">Experience</a>
-                <a href="#contact">Contact</a>
+                <a href="#about" data-i18n="nav-about">About Me</a>
+                <a href="#publications" data-i18n="nav-publications">Publications</a>
+                <a href="#projects" data-i18n="nav-projects">Projects</a>
+                <a href="#news" data-i18n="nav-news">News</a>
+                <a href="#experience" data-i18n="nav-experience">Experience</a>
+                <a href="#contact" data-i18n="nav-contact">Contact</a>
             </div>
             <div class="nav-controls">
                 <button class="nav-btn style-toggle" id="styleToggle" aria-label="Toggle style">
@@ -45,6 +45,15 @@
                     </svg>
                     <span class="nav-btn-label theme-label">Dark</span>
                 </button>
+                <span class="nav-divider"></span>
+                <button class="nav-btn lang-toggle" id="langToggle" aria-label="Toggle language">
+                    <svg class="nav-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="2" y1="12" x2="22" y2="12"/>
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                    </svg>
+                    <span class="nav-btn-label lang-label">中文</span>
+                </button>
             </div>
         </div>
     </nav>
@@ -58,10 +67,10 @@
         </div>
         <div class="hero-content">
             <div class="hero-text">
-                <p class="hero-greeting">Hello, I'm</p>
+                <p class="hero-greeting" data-i18n="hero-greeting">Hello, I'm</p>
                 <h1 class="hero-name">Jiyuan Liu</h1>
-                <p class="hero-title">PhD Student @ Southeast University</p>
-                <p class="hero-description" style="margin-top: 0.5rem; font-size: 0.95rem;">
+                <p class="hero-title" data-i18n="hero-title">PhD Student @ Southeast University</p>
+                <p class="hero-description" style="margin-top: 0.5rem; font-size: 0.95rem;" data-i18n="hero-lab">
                     Member of <strong>HIQC Lab</strong> (Heterogeneous Intelligent & Quantum Computing) | 
                     Research Assistant at <strong>Shicheng Lab</strong> (Novel Display & Visual Perception)
                 </p>
@@ -80,11 +89,11 @@
                 <div class="hero-stats">
                     <div class="stat">
                         <span class="stat-number">11</span>
-                        <span class="stat-label">Publications</span>
+                        <span class="stat-label" data-i18n="stat-publications">Publications</span>
                     </div>
                     <div class="stat">
                         <span class="stat-number">1</span>
-                        <span class="stat-label">Repository</span>
+                        <span class="stat-label" data-i18n="stat-repository">Repository</span>
                     </div>
                 </div>
                 <div style="margin-top: 1.5rem; padding: 1rem; background: linear-gradient(135deg, rgba(102,126,234,0.1) 0%, rgba(118,75,162,0.1) 100%); border-radius: 8px; border-left: 3px solid #667eea;">
@@ -93,8 +102,8 @@
                     </span>
                 </div>
                 <div class="hero-cta">
-                    <a href="#publications" class="btn btn-primary">View Publications</a>
-                    <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+                    <a href="#publications" class="btn btn-primary" data-i18n="btn-publications">View Publications</a>
+                    <a href="#contact" class="btn btn-secondary" data-i18n="btn-contact">Get in Touch</a>
                 </div>
             </div>
             <div class="hero-image">
@@ -112,7 +121,7 @@
                     <svg class="about-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                         <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
                     </svg>
-                    <h3>Research Interests</h3>
+                    <h3 data-i18n="research-interests">Research Interests</h3>
                 </div>
                 <div class="about-card-content">
                     <span class="interest-tag">High Performance Computing</span>
@@ -131,7 +140,7 @@
                     <svg class="about-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                         <path d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
                     </svg>
-                    <h3>Academic Links</h3>
+                    <h3 data-i18n="academic-links">Academic Links</h3>
                 </div>
                 <div class="about-card-content links-list">
                     <a href="https://scholar.google.com/citations?view_op=list_works&hl=zh-CN&user=_SWfcP4AAAAJ" class="academic-link" target="_blank">
@@ -162,7 +171,7 @@
     <section id="publications" class="section">
         <div class="section-container">
             <h2 class="section-title">
-                <span class="title-icon">//</span> Publications
+                <span class="title-icon" data-i18n="title-publications">// Publications</span>
             </h2>
             <div class="publications-list">
                 <article class="pub-card" data-year="2026" style="border-left: 3px solid #667eea; background: linear-gradient(135deg, rgba(102,126,234,0.05) 0%, rgba(118,75,162,0.05) 100%);">
@@ -356,11 +365,11 @@
     <section id="projects" class="section section-alt">
         <div class="section-container">
             <h2 class="section-title">
-                <span class="title-icon">//</span> Projects
+                <span class="title-icon" data-i18n="title-projects">// Projects</span>
             </h2>
             <div class="projects-grid">
                 <p style="text-align: center; color: var(--text-muted); padding: 2rem;">
-                    Projects coming soon...
+                    <span data-i18n="projects-placeholder">Projects coming soon...</span>
                 </p>
             </div>
         </div>
@@ -370,7 +379,7 @@
     <section id="news" class="section">
         <div class="section-container">
             <h2 class="section-title">
-                <span class="title-icon">//</span> News
+                <span class="title-icon" data-i18n="title-news">// News</span>
             </h2>
             <div class="news-timeline">
                 <div class="news-item">
@@ -426,32 +435,32 @@
     <section id="experience" class="section section-alt">
         <div class="section-container">
             <h2 class="section-title">
-                <span class="title-icon">//</span> Experience
+                <span class="title-icon" data-i18n="title-experience">// Experience</span>
             </h2>
             <div class="experience-grid">
                 <div class="exp-column">
-                    <h3 class="exp-category">Education</h3>
+                    <h3 class="exp-category" data-i18n="education">Education</h3>
                     <div class="exp-item">
                         <div class="exp-period">2023 - Present</div>
-                        <h4 class="exp-title">PhD Student</h4>
+                        <h4 class="exp-title" data-i18n="phd-student">PhD Student</h4>
                         <p class="exp-org">Southeast University</p>
-                        <p class="exp-desc">High Performance Computing, FPGA Acceleration</p>
+                        <p class="exp-desc" data-i18n="research-desc">High Performance Computing, FPGA Acceleration</p>
                     </div>
                     <div class="exp-item">
                         <div class="exp-period">2020 - 2023</div>
-                        <h4 class="exp-title">Master's Degree</h4>
+                        <h4 class="exp-title" data-i18n="master-degree">Master's Degree</h4>
                         <p class="exp-org">Southeast University</p>
                     </div>
                     <div class="exp-item">
                         <div class="exp-period">2016 - 2020</div>
-                        <h4 class="exp-title">Bachelor's Degree</h4>
+                        <h4 class="exp-title" data-i18n="bachelor-degree">Bachelor's Degree</h4>
                         <p class="exp-org">Southeast University</p>
                     </div>
                 </div>
                 <div class="exp-column">
-                    <h3 class="exp-category">Work</h3>
+                    <h3 class="exp-category" data-i18n="work">Work</h3>
                     <div class="exp-item">
-                        <p class="exp-desc">Coming Soon</p>
+                        <p class="exp-desc" data-i18n="coming-soon">Coming Soon</p>
                     </div>
                 </div>
             </div>
@@ -462,11 +471,11 @@
     <section id="contact" class="section">
         <div class="section-container">
             <h2 class="section-title">
-                <span class="title-icon">//</span> Contact
+                <span class="title-icon" data-i18n="title-contact">// Contact</span>
             </h2>
             <div class="contact-content">
                 <p class="contact-intro">
-                    Interested in collaboration or have questions about my research? Feel free to reach out!
+                    <span data-i18n="contact-intro">Interested in collaboration or have questions about my research? Feel free to reach out!</span>
                 </p>
                 <div class="contact-links">
                     <a href="mailto:erie@seu.edu.cn" class="contact-item">
@@ -501,5 +510,112 @@
     </footer>
 
     <script src="script.js"></script>
+<script>
+// Language Toggle
+const langToggle = document.getElementById('langToggle');
+const langLabel = document.querySelector('.lang-label');
+const html = document.documentElement;
+
+// Translation data
+const translations = {
+    en: {
+        'nav-about': 'About Me',
+        'nav-publications': 'Publications',
+        'nav-projects': 'Projects',
+        'nav-news': 'News',
+        'nav-experience': 'Experience',
+        'nav-contact': 'Contact',
+        'hero-greeting': 'Hello, I\'m',
+        'hero-title': 'PhD Student @ Southeast University',
+        'hero-lab': '<strong>HIQC Lab</strong> (Heterogeneous Intelligent & Quantum Computing) | <strong>Shicheng Lab</strong> (Novel Display & Visual Perception) Research Assistant',
+        'stat-publications': 'Publications',
+        'stat-repository': 'Repository',
+        'btn-publications': 'View Publications',
+        'btn-contact': 'Get in Touch',
+        'research-interests': 'Research Interests',
+        'academic-links': 'Academic Links',
+        'google-scholar': 'Google Scholar',
+        'title-publications': '// Publications',
+        'title-projects': '// Projects',
+        'projects-placeholder': '<span data-i18n="projects-placeholder">Projects coming soon...</span>',
+        'title-news': '// News',
+        'title-experience': '// Experience',
+        'education': 'Education',
+        'work': 'Work',
+        'phd-student': 'PhD Student',
+        'master-degree': 'Master\'s Degree',
+        'bachelor-degree': 'Bachelor\'s Degree',
+        'research-desc': 'High Performance Computing, FPGA Acceleration',
+        'coming-soon': 'Coming Soon',
+        'title-contact': '// Contact',
+        'contact-intro': '<span data-i18n="contact-intro">Interested in collaboration or have questions about my research? Feel free to reach out!</span>',
+        'lang-toggle': '中文'
+    },
+    zh: {
+        'nav-about': '关于我',
+        'nav-publications': '发表论文',
+        'nav-projects': '项目经历',
+        'nav-news': '新闻动态',
+        'nav-experience': '教育经历',
+        'nav-contact': '联系方式',
+        'hero-greeting': '你好，我是',
+        'hero-title': '东南大学 博士生',
+        'hero-lab': '<strong>HIQC 实验室</strong>（异构智能与量子计算）成员 | <strong>石城实验室</strong>（新型显示与视觉感知）助理研究员',
+        'stat-publications': '篇论文',
+        'stat-repository': '个仓库',
+        'btn-publications': '查看论文',
+        'btn-contact': '联系我',
+        'research-interests': '研究方向',
+        'academic-links': '学术链接',
+        'google-scholar': '谷歌学术',
+        'title-publications': '// 发表论文',
+        'title-projects': '// 项目经历',
+        'projects-placeholder': '项目即将上线...',
+        'title-news': '// 新闻动态',
+        'title-experience': '// 教育经历',
+        'education': '教育背景',
+        'work': '工作经历',
+        'phd-student': '博士生',
+        'master-degree': '硕士研究生',
+        'bachelor-degree': '本科',
+        'research-desc': '高性能计算，FPGA 加速',
+        'coming-soon': '即将上线',
+        'title-contact': '// 联系方式',
+        'contact-intro': '有兴趣合作或对我的研究有疑问？欢迎联系！',
+        'lang-toggle': 'English'
+    }
+};
+
+// Load saved language or default to English
+let currentLang = localStorage.getItem('language') || 'en';
+applyLanguage(currentLang);
+
+if (langToggle) {
+    langToggle.addEventListener('click', () => {
+        currentLang = currentLang === 'en' ? 'zh' : 'en';
+        localStorage.setItem('language', currentLang);
+        applyLanguage(currentLang);
+    });
+}
+
+function applyLanguage(lang) {
+    // Update toggle button label
+    if (langLabel) {
+        langLabel.textContent = translations[lang]['lang-toggle'];
+    }
+    
+    // Update all translatable elements
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang][key]) {
+            if (key === 'hero-lab') {
+                el.innerHTML = translations[lang][key];
+            } else {
+                el.textContent = translations[lang][key];
+            }
+        }
+    });
+}
+</script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-# Gaorui Zhang - Academic Homepage
+# Jiyuan Liu - Academic Homepage
 
 个人学术主页网站，展示研究成果、项目经历和学术动态。
 
@@ -20,18 +20,11 @@
 └── README.md              # 项目说明
 ```
 
-## 🚀 快速开始
+## 🚀 部署
 
-### 本地预览
+本网站通过 GitHub Pages 自动部署。
 
-直接在浏览器中打开 `index.html` 文件即可预览。
-
-### GitHub Pages 部署
-
-1. 将代码推送到 GitHub 仓库
-2. 在仓库设置中启用 GitHub Pages
-3. 选择 `main` 分支作为发布源
-4. 访问 `https://galaxy-dawn.github.io` 查看网站
+访问地址：https://Eriemon.github.io
 
 ## 🎨 主题和风格
 
@@ -46,7 +39,7 @@
 ## 📝 内容模块
 
 - **About Me**: 个人简介和研究方向
-- **Publications**: 学术论文和出版物
+- **Publications**: 学术论文和出版物（11 篇）
 - **Projects**: 研究项目展示
 - **News**: 学术动态和新闻
 - **Experience**: 教育和工作经历
@@ -65,10 +58,12 @@ MIT License
 
 ## 👤 作者
 
-**Gaorui Zhang**
-- AI Researcher
-- GitHub: [@galaxy-dawn](https://github.com/galaxy-dawn)
+**Jiyuan Liu**
+- PhD Student at Southeast University
+- Research: High Performance Computing, FPGA Acceleration
+- GitHub: [@Eriemon](https://github.com/Eriemon)
+- ORCID: [0009-0000-9034-6811](https://orcid.org/0009-0000-9034-6811)
 
 ---
 
-*Last updated: 2026-02-02*
+*Last updated: 2026-04-03*

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jiyuan Liu | PhD Student @ <span data-i18n="seu">Southeast University</span></title>
+    <title>Jiyuan Liu | PhD Student @ Southeast University</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link id="google-fonts" rel="stylesheet" href="">
@@ -514,6 +514,26 @@
 // Language Toggle
 document.addEventListener('DOMContentLoaded', function() {
     const langToggle = document.getElementById('langToggle');
+    
+    // Update page title based on language
+    function updateTitle(lang) {
+        if (lang === 'zh') {
+            document.title = 'Jiyuan Liu | 东南大学 博士生';
+        } else {
+            document.title = 'Jiyuan Liu | PhD Student @ Southeast University';
+        }
+    }
+    
+    // Apply title on language switch
+    const originalApplyLanguage = applyLanguage;
+    applyLanguage = function(lang) {
+        originalApplyLanguage(lang);
+        updateTitle(lang);
+    };
+    
+    // Initial title update
+    const currentLang = localStorage.getItem('language') || 'en';
+    updateTitle(currentLang);
 const langLabel = document.querySelector('.lang-label');
 const html = document.documentElement;
 

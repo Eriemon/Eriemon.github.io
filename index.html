@@ -514,6 +514,85 @@
 // Language Toggle
 document.addEventListener('DOMContentLoaded', function() {
     const langToggle = document.getElementById('langToggle');
+    const langLabel = document.querySelector('.lang-label');
+    
+    // Translation data
+    const translations = {
+        en: {
+            'nav-about': 'About Me',
+            'nav-publications': 'Publications',
+            'nav-projects': 'Projects',
+            'nav-news': 'News',
+            'nav-experience': 'Experience',
+            'nav-contact': 'Contact',
+            'hero-greeting': 'Hello, I\'m',
+            'hero-title': 'PhD Student @ Southeast University',
+            'hero-lab': '<strong>HIQC Lab</strong> (Heterogeneous Intelligent & Quantum Computing) Member | <strong>Shicheng Lab</strong> (Novel Display & Visual Perception) Research Assistant',
+            'about-research': 'I am a Ph.D. student at <a href="https://www.seu.edu.cn/" target="_blank">Southeast University</a>. My research focuses on <span class="highlight">High Performance Computing</span> and <span class="highlight">FPGA Accelerator Design</span>.',
+            'about-languages': '<strong>Programming Languages:</strong> Python, Matlab, C/C++, HTML, Java, and Verilog HDL.',
+            'about-skills': '<strong>Technical Skills:</strong> Embedded system development, FPGA development (PL/PS/AI Engine), SoC design, and data center acceleration.',
+            'stat-publications': 'Publications',
+            'stat-repository': 'Repository',
+            'btn-publications': 'View Publications',
+            'btn-contact': 'Get in Touch',
+            'research-interests': 'Research Interests',
+            'academic-links': 'Academic Links',
+            'google-scholar': 'Google Scholar',
+            'seu': 'Southeast University',
+            'title-publications': '// Publications',
+            'title-projects': '// Projects',
+            'projects-placeholder': 'Projects coming soon...',
+            'title-news': '// News',
+            'title-experience': '// Experience',
+            'education': 'Education',
+            'work': 'Work',
+            'phd-student': 'PhD Student',
+            'master-degree': 'Master\'s Degree',
+            'bachelor-degree': 'Bachelor\'s Degree',
+            'research-desc': 'High Performance Computing, FPGA Acceleration',
+            'coming-soon': 'Coming Soon',
+            'title-contact': '// Contact',
+            'contact-intro': 'Interested in collaboration or have questions about my research? Feel free to reach out!',
+            'lang-toggle': '中文'
+        },
+        zh: {
+            'nav-about': '关于我',
+            'nav-publications': '发表论文',
+            'nav-projects': '项目经历',
+            'nav-news': '新闻动态',
+            'nav-experience': '教育经历',
+            'nav-contact': '联系方式',
+            'hero-greeting': '你好，我是',
+            'hero-title': '东南大学 博士生',
+            'hero-lab': '<strong>HIQC 实验室</strong>（异构智能与量子计算）成员 | <strong>石城实验室</strong>（新型显示与视觉感知）助理研究员',
+            'about-research': '我是 <a href="https://www.seu.edu.cn/" target="_blank">东南大学</a> 博士生，研究方向为 <span class="highlight">高性能计算</span> 和 <span class="highlight">FPGA 加速器设计</span>。',
+            'about-languages': '<strong>编程语言：</strong>Python, Matlab, C/C++, HTML, Java, Verilog HDL。',
+            'about-skills': '<strong>技术技能：</strong>嵌入式系统开发，FPGA 开发（PL/PS/AI Engine），SoC 设计，数据中心加速。',
+            'stat-publications': '篇论文',
+            'stat-repository': '个仓库',
+            'btn-publications': '查看论文',
+            'btn-contact': '联系我',
+            'research-interests': '研究方向',
+            'academic-links': '学术链接',
+            'google-scholar': '谷歌学术',
+            'seu': '东南大学',
+            'title-publications': '// 发表论文',
+            'title-projects': '// 项目经历',
+            'projects-placeholder': '项目即将上线...',
+            'title-news': '// 新闻动态',
+            'title-experience': '// 教育经历',
+            'education': '教育背景',
+            'work': '工作经历',
+            'phd-student': '博士生',
+            'master-degree': '硕士研究生',
+            'bachelor-degree': '本科',
+            'research-desc': '高性能计算，FPGA 加速',
+            'coming-soon': '即将上线',
+            'title-contact': '// 联系方式',
+            'contact-intro': '有兴趣合作或对我的研究有疑问？欢迎联系！',
+            'lang-toggle': 'English'
+        }
+    };
     
     // Update page title based on language
     function updateTitle(lang) {
@@ -524,154 +603,43 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Apply title on language switch
-    const originalApplyLanguage = applyLanguage;
-    applyLanguage = function(lang) {
-        originalApplyLanguage(lang);
-        updateTitle(lang);
-    };
-    
-    // Initial title update
-    const currentLang = localStorage.getItem('language') || 'en';
-    updateTitle(currentLang);
-const langLabel = document.querySelector('.lang-label');
-const html = document.documentElement;
-
-// Translation data
-const translations = {
-    en: {
-        'nav-about': 'About Me',
-        'nav-publications': 'Publications',
-        'nav-projects': 'Projects',
-        'nav-news': 'News',
-        'nav-experience': 'Experience',
-        'nav-contact': 'Contact',
-        'hero-greeting': 'Hello, I\'m',
-        'hero-title': 'PhD Student @ Southeast University',
-        'hero-lab': '<strong>HIQC Lab</strong> (Heterogeneous Intelligent & Quantum Computing) Member | <strong>Shicheng Lab</strong> (Novel Display & Visual Perception) Research Assistant',
-        'about-research': 'I am a Ph.D. student at <a href="https://www.seu.edu.cn/" target="_blank">Southeast University</a>. My research focuses on <span class="highlight">High Performance Computing</span> and <span class="highlight">FPGA Accelerator Design</span>.',
-        'about-languages': '<strong>Programming Languages:</strong> Python, Matlab, C/C++, HTML, Java, and Verilog HDL.',
-        'about-skills': '<strong>Technical Skills:</strong> Embedded system development, FPGA development (PL/PS/AI Engine), SoC design, and data center acceleration.',
-        'stat-publications': 'Publications',
-        'stat-repository': 'Repository',
-        'btn-publications': 'View Publications',
-        'btn-contact': 'Get in Touch',
-        'research-interests': 'Research Interests',
-        'academic-links': 'Academic Links',
-        'google-scholar': 'Google Scholar',
-        'seu': 'Southeast University',
-        'title-publications': '// Publications',
-        'title-projects': '// Projects',
-        'projects-placeholder': 'Projects coming soon...',
-        'title-news': '// News',
-        'title-experience': '// Experience',
-        'education': 'Education',
-        'work': 'Work',
-        'phd-student': 'PhD Student',
-        'master-degree': 'Master\'s Degree',
-        'bachelor-degree': 'Bachelor\'s Degree',
-        'research-desc': 'High Performance Computing, FPGA Acceleration',
-        'coming-soon': 'Coming Soon',
-        'title-contact': '// Contact',
-        'contact-intro': 'Interested in collaboration or have questions about my research? Feel free to reach out!',
-        'lang-toggle': '中文'
-    },
-    zh: {
-        'nav-about': '关于我',
-        'nav-publications': '发表论文',
-        'nav-projects': '项目经历',
-        'nav-news': '新闻动态',
-        'nav-experience': '教育经历',
-        'nav-contact': '联系方式',
-        'hero-greeting': '你好，我是',
-        'hero-title': '东南大学 博士生',
-        'hero-lab': '<strong>HIQC 实验室</strong>（异构智能与量子计算）成员 | <strong>石城实验室</strong>（新型显示与视觉感知）助理研究员',
-        'about-research': '我是 <a href="https://www.seu.edu.cn/" target="_blank">东南大学</a> 博士生，研究方向为 <span class="highlight">高性能计算</span> 和 <span class="highlight">FPGA 加速器设计</span>。',
-        'about-languages': '<strong>编程语言：</strong>Python, Matlab, C/C++, HTML, Java, Verilog HDL。',
-        'about-skills': '<strong>技术技能：</strong>嵌入式系统开发，FPGA 开发（PL/PS/AI Engine），SoC 设计，数据中心加速。',
-        'stat-publications': '篇论文',
-        'stat-repository': '个仓库',
-        'btn-publications': '查看论文',
-        'btn-contact': '联系我',
-        'research-interests': '研究方向',
-        'academic-links': '学术链接',
-        'google-scholar': '谷歌学术',
-        'seu': '东南大学',
-        'title-publications': '// 发表论文',
-        'title-projects': '// 项目经历',
-        'projects-placeholder': '项目即将上线...',
-        'title-news': '// 新闻动态',
-        'title-experience': '// 教育经历',
-        'education': '教育背景',
-        'work': '工作经历',
-        'phd-student': '博士生',
-        'master-degree': '硕士研究生',
-        'bachelor-degree': '本科',
-        'research-desc': '高性能计算，FPGA 加速',
-        'coming-soon': '即将上线',
-        'title-contact': '// 联系方式',
-        'contact-intro': '有兴趣合作或对我的研究有疑问？欢迎联系！',
-        'lang-toggle': 'English'
-    }
-};
-
-// Load saved language or default to English
-let currentLang = localStorage.getItem('language') || 'en';
-applyLanguage(currentLang);
-
-if (langToggle) {
-    langToggle.addEventListener('click', () => {
-        currentLang = currentLang === 'en' ? 'zh' : 'en';
-        localStorage.setItem('language', currentLang);
-        applyLanguage(currentLang);
-    });
-}
-
-// Update page title based on language
-function updateTitle(lang) {
-    if (lang === 'zh') {
-        document.title = 'Jiyuan Liu | 东南大学 博士生';
-    } else {
-        document.title = 'Jiyuan Liu | PhD Student @ Southeast University';
-    }
-}
-
-function applyLanguage(lang) {
-    console.log('Applying language:', lang);
-    
-    // Update toggle button label
-    if (langLabel) {
-        langLabel.textContent = translations[lang]['lang-toggle'];
-    }
-    
-    // Update all translatable elements
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (translations[lang] && translations[lang][key]) {
-            // Use innerHTML for content that may contain HTML tags
-            el.innerHTML = translations[lang][key];
-        } else {
-            console.log('Missing translation for key:', key, 'in lang:', lang);
+    // Apply language function
+    function applyLanguage(lang) {
+        console.log('Applying language:', lang);
+        
+        // Update toggle button label
+        if (langLabel) {
+            langLabel.textContent = translations[lang]['lang-toggle'];
         }
-    });
+        
+        // Update all translatable elements
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (translations[lang] && translations[lang][key]) {
+                el.innerHTML = translations[lang][key];
+            } else {
+                console.log('Missing translation for key:', key, 'in lang:', lang);
+            }
+        });
+        
+        // Update page title
+        updateTitle(lang);
+        
+        console.log('Language applied successfully');
+    }
     
-    // Update page title
-    updateTitle(lang);
+    // Load saved language or default to English
+    let currentLang = localStorage.getItem('language') || 'en';
+    applyLanguage(currentLang);
     
-    console.log('Language applied successfully');
-}
-
-// Load saved language or default to English
-const currentLang = localStorage.getItem('language') || 'en';
-applyLanguage(currentLang);
-
-if (langToggle) {
-    langToggle.addEventListener('click', () => {
-        currentLang = currentLang === 'en' ? 'zh' : 'en';
-        localStorage.setItem('language', currentLang);
-        applyLanguage(currentLang);
-    });
-}
+    // Bind click event
+    if (langToggle) {
+        langToggle.addEventListener('click', function() {
+            currentLang = currentLang === 'en' ? 'zh' : 'en';
+            localStorage.setItem('language', currentLang);
+            applyLanguage(currentLang);
+        });
+    }
 });
 </script>
 </body>

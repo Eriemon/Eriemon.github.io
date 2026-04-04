@@ -8,6 +8,62 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link id="google-fonts" rel="stylesheet" href="">
     <link rel="stylesheet" href="style-academic.css" id="theme-style">
+<style>
+.awards-list {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+.award-item {
+    display: flex;
+    gap: 2rem;
+    padding: 1.5rem;
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    transition: all var(--transition-base);
+}
+.award-item:hover {
+    border-color: var(--accent-primary);
+    box-shadow: var(--shadow-md);
+    transform: translateX(4px);
+}
+.award-year {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--accent-primary);
+    min-width: 80px;
+    padding-top: 0.25rem;
+}
+.award-content {
+    flex: 1;
+}
+.award-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+.award-level {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    padding: 0.25rem 0.75rem;
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    color: white;
+    border-radius: 9999px;
+    display: inline-block;
+    font-weight: 500;
+}
+@media (max-width: 768px) {
+    .award-item {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .award-year {
+        min-width: auto;
+    }
+}
+</style>
 </head>
 <body>
     <!-- Navigation -->
@@ -431,7 +487,57 @@
         </div>
     </section>
 
-    <!-- Education Section -->
+    <!-- Awards Section -->
+    <section id="awards" class="section">
+        <div class="section-container">
+            <h2 class="section-title">
+                <span class="title-icon">//</span> <span data-i18n="title-awards">Awards & Honors</span>
+            </h2>
+            <div class="awards-list">
+                <div class="award-item">
+                    <div class="award-year">2021.10</div>
+                    <div class="award-content">
+                        <h3 class="award-title" data-i18n="award-1-title">第五届全国大学生集成电路创新创业大赛</h3>
+                        <p class="award-level" data-i18n="award-1-level">全国一等奖</p>
+                    </div>
+                </div>
+                
+                <div class="award-item">
+                    <div class="award-year">2021.12</div>
+                    <div class="award-content">
+                        <h3 class="award-title" data-i18n="award-2-title">第三届全国大学生 EDA 精英挑战赛</h3>
+                        <p class="award-level" data-i18n="award-2-level">全国二等奖</p>
+                    </div>
+                </div>
+                
+                <div class="award-item">
+                    <div class="award-year">2020.10</div>
+                    <div class="award-content">
+                        <h3 class="award-title" data-i18n="award-3-title">第四届全国大学生集成电路创新创业大赛</h3>
+                        <p class="award-level" data-i18n="award-3-level">全国一等奖 + 企业杯</p>
+                    </div>
+                </div>
+                
+                <div class="award-item">
+                    <div class="award-year">2020</div>
+                    <div class="award-content">
+                        <h3 class="award-title" data-i18n="award-4-title">全国大学生 EDA 精英挑战赛</h3>
+                        <p class="award-level" data-i18n="award-4-level">全国三等奖</p>
+                    </div>
+                </div>
+                
+                <div class="award-item">
+                    <div class="award-year">2019</div>
+                    <div class="award-content">
+                        <h3 class="award-title" data-i18n="award-5-title">"TI"杯全国大学生电子设计竞赛</h3>
+                        <p class="award-level" data-i18n="award-5-level">全国二等奖</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Education Section -->
     <section id="experience" class="section section-alt">
         <div class="section-container">
             <h2 class="section-title">
@@ -553,6 +659,18 @@ document.addEventListener('DOMContentLoaded', function() {
             'coming-soon': 'Coming Soon',
             'title-contact': '// Contact',
             'contact-intro': 'Interested in collaboration or have questions about my research? Feel free to reach out!',
+            'nav-awards': 'Awards',
+            'title-awards': 'Awards & Honors',
+            'award-1-title': '5th National College Student IC Innovation Competition',
+            'award-1-level': 'National First Prize',
+            'award-2-title': '3rd National College Student EDA Elite Challenge',
+            'award-2-level': 'National Second Prize',
+            'award-3-title': '4th National College Student IC Innovation Competition',
+            'award-3-level': 'National First Prize + Enterprise Cup',
+            'award-4-title': 'National College Student EDA Elite Challenge',
+            'award-4-level': 'National Third Prize',
+            'award-5-title': '"TI" Cup National College Student Electronic Design Competition',
+            'award-5-level': 'National Second Prize',
             'lang-toggle': '中文'
         },
         zh: {
@@ -590,6 +708,18 @@ document.addEventListener('DOMContentLoaded', function() {
             'coming-soon': '即将上线',
             'title-contact': '// 联系方式',
             'contact-intro': '有兴趣合作或对我的研究有疑问？欢迎联系！',
+            'nav-awards': '竞赛获奖',
+            'title-awards': '竞赛获奖与荣誉',
+            'award-1-title': '第五届全国大学生集成电路创新创业大赛',
+            'award-1-level': '全国一等奖',
+            'award-2-title': '第三届全国大学生 EDA 精英挑战赛',
+            'award-2-level': '全国二等奖',
+            'award-3-title': '第四届全国大学生集成电路创新创业大赛',
+            'award-3-level': '全国一等奖 + 企业杯',
+            'award-4-title': '全国大学生 EDA 精英挑战赛',
+            'award-4-level': '全国三等奖',
+            'award-5-title': '"TI"杯全国大学生电子设计竞赛',
+            'award-5-level': '全国二等奖',
             'lang-toggle': 'English'
         }
     };

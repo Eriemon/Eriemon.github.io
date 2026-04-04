@@ -627,11 +627,19 @@ if (langToggle) {
     });
 }
 
+// Update page title based on language
+function updateTitle(lang) {
+    if (lang === 'zh') {
+        document.title = 'Jiyuan Liu | 东南大学 博士生';
+    } else {
+        document.title = 'Jiyuan Liu | PhD Student @ Southeast University';
+    }
+}
+
 function applyLanguage(lang) {
     console.log('Applying language:', lang);
     
     // Update toggle button label
-    const langLabel = document.querySelector('.lang-label');
     if (langLabel) {
         langLabel.textContent = translations[lang]['lang-toggle'];
     }
@@ -647,7 +655,22 @@ function applyLanguage(lang) {
         }
     });
     
+    // Update page title
+    updateTitle(lang);
+    
     console.log('Language applied successfully');
+}
+
+// Load saved language or default to English
+const currentLang = localStorage.getItem('language') || 'en';
+applyLanguage(currentLang);
+
+if (langToggle) {
+    langToggle.addEventListener('click', () => {
+        currentLang = currentLang === 'en' ? 'zh' : 'en';
+        localStorage.setItem('language', currentLang);
+        applyLanguage(currentLang);
+    });
 }
 });
 </script>

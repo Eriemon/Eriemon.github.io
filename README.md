@@ -98,7 +98,7 @@ Citation metadata is available in [CITATION.cff](CITATION.cff). A BibTeX-style r
 ```bibtex
 @software{liu_2026_eriemon_homepage,
   author = {Liu, Jiyuan},
-  title = {{Eriemon.github.io}: A Personal Academic Homepage},
+  title = {Eriemon.github.io: A Personal Academic Homepage},
   year = {2026},
   url = {https://github.com/Eriemon/Eriemon.github.io},
   license = {Apache-2.0}

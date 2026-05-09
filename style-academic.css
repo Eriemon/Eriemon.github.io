@@ -282,7 +282,9 @@ a:hover {
 
 .hero-stats {
     display: flex;
+    flex-wrap: wrap;
     gap: var(--space-xl);
+    row-gap: var(--space-md);
     margin-bottom: var(--space-xl);
     padding: var(--space-lg) 0;
     border-top: 1px solid var(--border-color);
@@ -306,6 +308,17 @@ a:hover {
 .hero-cta {
     display: flex;
     gap: var(--space-md);
+}
+
+.hero-highlight {
+    margin-top: 1.5rem;
+    padding: 0.9rem 1rem;
+    background: color-mix(in srgb, var(--accent-primary) 8%, var(--bg-card));
+    border-left: 3px solid var(--accent-primary);
+    border-radius: var(--radius-lg);
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    line-height: 1.5;
 }
 
 .btn {
@@ -529,28 +542,37 @@ a:hover {
 
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: var(--space-lg);
 }
 
 .project-card {
+    display: flex;
+    flex-direction: column;
     padding: var(--space-lg);
     background: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
-    transition: border-color var(--transition-fast);
-    cursor: pointer;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .project-card:hover {
     border-color: var(--accent-primary);
+    box-shadow: var(--shadow-md);
+}
+
+.project-header {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
 }
 
 .project-icon {
     width: 32px;
     height: 32px;
-    margin-bottom: var(--space-md);
     color: var(--accent-primary);
+    flex-shrink: 0;
 }
 
 .project-icon svg {
@@ -562,7 +584,7 @@ a:hover {
     font-family: var(--font-display);
     font-size: 0.95rem;
     font-weight: 600;
-    margin-bottom: var(--space-sm);
+    line-height: 1.35;
 }
 
 .project-desc {
@@ -589,7 +611,9 @@ a:hover {
 }
 
 .project-links {
+    margin-top: auto;
     display: flex;
+    flex-wrap: wrap;
     gap: var(--space-md);
 }
 
@@ -599,6 +623,7 @@ a:hover {
     gap: 4px;
     font-size: 0.8rem;
     color: var(--accent-primary);
+    font-weight: 500;
 }
 
 .project-link:hover {
@@ -665,10 +690,55 @@ a:hover {
     text-align: center;
 }
 
+.news-badge-meeting {
+    background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
+}
+
+.news-badge-paper {
+    background: linear-gradient(135deg, #f97316 0%, #db2777 100%);
+}
+
+.news-badge-lab {
+    background: linear-gradient(135deg, #0f766e 0%, #16a34a 100%);
+}
+
 .news-text {
     color: var(--text-secondary);
     line-height: 1.5;
     font-size: 0.9rem;
+}
+
+.news-actions {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: var(--space-sm);
+}
+
+.news-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem 0.65rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.news-link:hover {
+    text-decoration: none;
+}
+
+.news-link-paper {
+    background: linear-gradient(135deg, #f97316 0%, #db2777 100%);
+    color: white;
+}
+
+.news-link-wechat {
+    background: #16a34a;
+    color: white;
 }
 
 /* ========================================

@@ -1,69 +1,110 @@
-# Jiyuan Liu - Academic Homepage
+<p align="center">
+  <a href="README.md"><strong>English</strong></a>
+  <span>&nbsp;|&nbsp;</span>
+  <a href="README-CN.md">中文</a>
+</p>
 
-个人学术主页网站，展示研究成果、项目经历和学术动态。
+<p align="center">
+  <a href="LICENSE"><img alt="License" src="https://img.shields.io/badge/license-Apache--2.0-1f6feb"></a>
+  <a href="https://Eriemon.github.io"><img alt="GitHub Pages" src="https://img.shields.io/badge/GitHub%20Pages-live-16a34a"></a>
+  <img alt="Stack" src="https://img.shields.io/badge/stack-HTML%20%7C%20CSS%20%7C%20JS-f59e0b">
+  <img alt="Default Style" src="https://img.shields.io/badge/default-Natural-22c55e">
+</p>
 
-## 🌟 特性
+<h1 align="center">Jiyuan Liu Academic Homepage</h1>
 
-- **双主题切换**: 支持 Light/Dark 模式
-- **双风格切换**: Academic（学术风格）和 Natural（自然风格）
-- **响应式设计**: 适配各种设备屏幕
-- **现代化界面**: 简洁优雅的学术风格设计
+<p align="center">
+  A bilingual GitHub Pages academic homepage for research, publications, selected projects, and news.
+</p>
 
-## 📁 项目结构
+## Overview
 
+This repository powers [Eriemon.github.io](https://Eriemon.github.io), the personal academic homepage of Jiyuan Liu, a PhD student at Southeast University. The site presents research interests in high performance computing and FPGA accelerator design, 11 publications, 5 selected GitHub projects with 16 total stars, and recent academic news including QCDAC 2026 and DAC 2026.
+
+The site is intentionally static: it uses plain HTML, CSS, and JavaScript so it can be reviewed easily, deployed through GitHub Pages, and maintained without a build system.
+
+## Features
+
+- Bilingual English and Chinese content switching.
+- Natural style as the default visual theme, with an Academic style available from the style toggle.
+- Light and dark theme switching with local browser preference persistence.
+- Responsive layout for desktop and mobile visitors.
+- Publication, project, news, experience, awards, and contact sections.
+- GitHub Pages deployment with no runtime backend or package dependency.
+
+## Site Sections
+
+| Section | Purpose |
+| --- | --- |
+| About | Research profile, lab affiliation, programming languages, and technical skills. |
+| Publications | 11 academic publications, including the DAC 2026 paper highlight. |
+| Projects | 5 selected repositories: `Github-Homepage-Setup-Guide`, `hls-generator`, `verilog-generator`, `remote-ssh`, and `github-management`. |
+| News | Recent academic updates, including QCDAC 2026 in Ningbo, DAC 2026, FPT 2026, HIQC Lab recruitment, and Integration. |
+| Experience | Education and research/work experience timeline. |
+| Contact | Email, GitHub, ORCID, Google Scholar, and related academic links. |
+
+## Project Map
+
+| Path | Description |
+| --- | --- |
+| `index.html` | Main single-page homepage content and bilingual translation dictionary. |
+| `style-natural.css` | Default Natural visual system. |
+| `style-academic.css` | Alternative Academic visual system. |
+| `script.js` | Theme/style/language toggles, scroll animation, and UI behavior. |
+| `dac2026.html` | Dedicated DAC 2026 paper detail page. |
+| `images/` | Local profile and research images used by the site. |
+
+## Local Preview
+
+From the repository root:
+
+```powershell
+python -m http.server 8765 --bind 127.0.0.1
 ```
-.
-├── index.html              # 主页面
-├── style-academic.css      # 学术风格样式
-├── style-natural.css       # 自然风格样式
-├── script.js               # 交互脚本（主题/风格切换）
-└── README.md              # 项目说明
+
+Then open:
+
+```text
+http://127.0.0.1:8765/
 ```
 
-## 🚀 部署
+Useful checks before publishing:
 
-本网站通过 GitHub Pages 自动部署。
+```powershell
+git diff --check
+```
 
-访问地址：https://Eriemon.github.io
+## Deployment
 
-## 🎨 主题和风格
+The site is designed for GitHub Pages and can be served directly from the repository without a build step. Updates to the published branch are reflected at:
 
-### 主题模式
-- **Light Mode**: 明亮清晰的浅色主题
-- **Dark Mode**: 护眼舒适的深色主题
+[https://Eriemon.github.io](https://Eriemon.github.io)
 
-### 风格选择
-- **Academic Style**: 传统学术风格，适合正式场合
-- **Natural Style**: 现代自然风格，更加亲和友好
+## Privacy and Scope
 
-## 📝 内容模块
+This repository is a public static homepage. Do not commit private drafts, access tokens, local machine paths, unpublished personal data, or generated files that are not part of the site. External links should point only to public academic, project, or contact pages that are intended for visitors.
 
-- **About Me**: 个人简介和研究方向
-- **Publications**: 学术论文和出版物（11 篇）
-- **Projects**: 研究项目展示
-- **News**: 学术动态和新闻
-- **Experience**: 教育和工作经历
-- **Contact**: 联系方式
+## Contact
 
-## 🛠️ 技术栈
-
-- HTML5
-- CSS3 (CSS Variables, Flexbox, Grid)
-- Vanilla JavaScript
-- Google Fonts
-
-## 📄 License
-
-MIT License
-
-## 👤 作者
-
-**Jiyuan Liu**
-- PhD Student at Southeast University
-- Research: High Performance Computing, FPGA Acceleration
+- Email: [erie@seu.edu.cn](mailto:erie@seu.edu.cn)
 - GitHub: [@Eriemon](https://github.com/Eriemon)
 - ORCID: [0009-0000-9034-6811](https://orcid.org/0009-0000-9034-6811)
+- Google Scholar: [Jiyuan Liu](https://scholar.google.com/citations?user=0-PQi3AAAAAJ)
 
----
+## Citation
 
-*Last updated: 2026-04-03*
+Citation metadata is available in [CITATION.cff](CITATION.cff). A BibTeX-style reference is:
+
+```bibtex
+@software{liu_2026_eriemon_homepage,
+  author = {Liu, Jiyuan},
+  title = {{Eriemon.github.io}: A Personal Academic Homepage},
+  year = {2026},
+  url = {https://github.com/Eriemon/Eriemon.github.io},
+  license = {Apache-2.0}
+}
+```
+
+## License
+
+This project is licensed under the [Apache License 2.0](LICENSE).

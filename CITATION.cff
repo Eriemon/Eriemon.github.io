@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use or reference this academic homepage, please cite it using the metadata below."
+title: "Eriemon.github.io: A Personal Academic Homepage"
+type: software
+authors:
+  - family-names: "Liu"
+    given-names: "Jiyuan"
+    email: "erie@seu.edu.cn"
+abstract: "Eriemon.github.io is a bilingual GitHub Pages academic homepage for Jiyuan Liu, presenting research interests, publications, selected projects, news, experience, and contact information."
+keywords:
+  - academic homepage
+  - GitHub Pages
+  - research portfolio
+  - FPGA
+  - high performance computing
+repository-code: "https://github.com/Eriemon/Eriemon.github.io"
+url: "https://Eriemon.github.io"
+date-released: "2026-05-09"
+year: 2026
+license: "Apache-2.0"

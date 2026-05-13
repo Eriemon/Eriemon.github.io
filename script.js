@@ -18,11 +18,31 @@ const STYLES = {
     }
 };
 
-// Load saved style or default to Natural
-const savedStyle = localStorage.getItem('selectedStyle') || 'style-natural.css';
+const DEFAULT_STYLE = STYLES.natural.file;
+const STYLE_ALIASES = {
+    academic: STYLES.academic.file,
+    natural: STYLES.natural.file
+};
+
+function resolveStoredStyle(styleValue) {
+    const normalized = typeof styleValue === 'string' ? styleValue.trim() : '';
+    if (!normalized) {
+        return DEFAULT_STYLE;
+    }
+
+    if (normalized === STYLES.academic.file || normalized === STYLES.natural.file) {
+        return normalized;
+    }
+
+    return STYLE_ALIASES[normalized.toLowerCase()] || DEFAULT_STYLE;
+}
+
+// Load saved style or default to Natural, then persist the canonical value.
+const savedStyle = resolveStoredStyle(localStorage.getItem('selectedStyle'));
 if (styleLink) {
     styleLink.href = savedStyle;
 }
+localStorage.setItem('selectedStyle', savedStyle);
 
 // Font loading
 const googleFontsLink = document.getElementById('google-fonts');

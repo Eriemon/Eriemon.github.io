@@ -19,7 +19,7 @@
 
 ## 项目简介
 
-本仓库用于维护 [Eriemon.github.io](https://Eriemon.github.io)，即 Jiyuan Liu 的个人学术主页。主页展示高性能计算与 FPGA 加速器设计相关研究方向、11 篇学术论文、5 个精选 GitHub 项目及其合计 16 颗星标，并同步 QCDAC 2026、DAC 2026 等近期学术动态。
+本仓库用于维护 [Eriemon.github.io](https://Eriemon.github.io)，即 Jiyuan Liu 的个人学术主页。主页展示高性能计算与 FPGA 加速器设计相关研究方向、11 篇学术论文，以及一个 GitHub 项目概览区：当前展示全部 9 个公开仓库，并为每个仓库显示星标、Fork 和近 14 天克隆次数。
 
 站点采用纯静态实现：只包含 HTML、CSS 和 JavaScript，便于审阅、维护和通过 GitHub Pages 直接部署。
 
@@ -38,7 +38,7 @@
 | --- | --- |
 | About | 研究简介、实验室信息、编程语言和技术技能。 |
 | Publications | 11 篇学术论文，包括 DAC 2026 论文亮点。 |
-| Projects | 5 个精选仓库：`Github-Homepage-Setup-Guide`、`hls-generator`、`verilog-generator`、`remote-ssh`、`github-management`。 |
+| Projects | 当前全部 9 个公开仓库，并在每张卡片中展示 Stars、Forks 和 14 天 Clones 指标。 |
 | News | QCDAC 2026 浙江宁波会议、DAC 2026、FPT 2026、HIQC Lab 招生和 Integration 论文动态。 |
 | Experience | 教育经历与科研/工作经历时间线。 |
 | Contact | 邮箱、GitHub、ORCID、Google Scholar 等公开联系方式。 |

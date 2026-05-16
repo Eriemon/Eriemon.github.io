@@ -601,6 +601,30 @@ a:hover {
     margin-bottom: var(--space-md);
 }
 
+.project-metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: var(--space-md);
+}
+
+.project-metric {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    padding: 2px var(--space-sm);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-muted);
+}
+
+.project-metric strong {
+    color: var(--accent-primary);
+    font-weight: 700;
+}
+
 .tag {
     font-family: var(--font-mono);
     font-size: 0.65rem;
@@ -633,11 +657,6 @@ a:hover {
 .project-link svg {
     width: 14px;
     height: 14px;
-}
-
-.project-stars {
-    font-size: 0.8rem;
-    color: var(--text-muted);
 }
 
 /* ========================================

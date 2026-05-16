@@ -19,7 +19,7 @@
 
 ## Overview
 
-This repository powers [Eriemon.github.io](https://Eriemon.github.io), the personal academic homepage of Jiyuan Liu, a PhD student at Southeast University. The site presents research interests in high performance computing and FPGA accelerator design, 11 publications, 5 selected GitHub projects with 16 total stars, and recent academic news including QCDAC 2026 and DAC 2026.
+This repository powers [Eriemon.github.io](https://Eriemon.github.io), the personal academic homepage of Jiyuan Liu, a PhD student at Southeast University. The site presents research interests in high performance computing and FPGA accelerator design, 11 publications, and a GitHub project snapshot that currently shows all 9 public repositories together with stars, forks, and 14-day clone counts.
 
 The site is intentionally static: it uses plain HTML, CSS, and JavaScript so it can be reviewed easily, deployed through GitHub Pages, and maintained without a build system.
 
@@ -38,7 +38,7 @@ The site is intentionally static: it uses plain HTML, CSS, and JavaScript so it 
 | --- | --- |
 | About | Research profile, lab affiliation, programming languages, and technical skills. |
 | Publications | 11 academic publications, including the DAC 2026 paper highlight. |
-| Projects | 5 selected repositories: `Github-Homepage-Setup-Guide`, `hls-generator`, `verilog-generator`, `remote-ssh`, and `github-management`. |
+| Projects | All 9 public repositories, with per-card Stars, Forks, and Clones (14d) metrics. |
 | News | Recent academic updates, including QCDAC 2026 in Ningbo, DAC 2026, FPT 2026, HIQC Lab recruitment, and Integration. |
 | Experience | Education and research/work experience timeline. |
 | Contact | Email, GitHub, ORCID, Google Scholar, and related academic links. |

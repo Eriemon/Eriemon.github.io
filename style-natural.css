@@ -641,6 +641,29 @@ a:hover {
     margin-bottom: var(--space-lg);
 }
 
+.project-metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-lg);
+}
+
+.project-metric {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    padding: var(--space-xs) var(--space-sm);
+    background: rgba(94, 141, 94, 0.09);
+    border-radius: var(--radius-full);
+    color: var(--text-muted);
+}
+
+.project-metric strong {
+    color: var(--accent-primary);
+    font-weight: 700;
+}
+
 .tag {
     font-size: 0.75rem;
     padding: var(--space-xs) var(--space-sm);
@@ -672,11 +695,6 @@ a:hover {
 .project-link svg {
     width: 18px;
     height: 18px;
-}
-
-.project-stars {
-    font-size: 0.85rem;
-    color: var(--text-muted);
 }
 
 /* ========================================

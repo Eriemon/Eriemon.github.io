@@ -1,0 +1,63 @@
+{
+  "summary": {
+    "projects": 9,
+    "repositories": 9,
+    "stars": 228
+  },
+  "projects": [
+    {
+      "name": "verilog-generator",
+      "stars": 169,
+      "forks": 5,
+      "clones14d": 148
+    },
+    {
+      "name": "hls-generator",
+      "stars": 18,
+      "forks": 3,
+      "clones14d": 22
+    },
+    {
+      "name": "remote-ssh",
+      "stars": 13,
+      "forks": 2,
+      "clones14d": 54
+    },
+    {
+      "name": "agents-md-generator",
+      "stars": 15,
+      "forks": 2,
+      "clones14d": 100
+    },
+    {
+      "name": "Eriemon.github.io",
+      "stars": 2,
+      "forks": 0,
+      "clones14d": 8
+    },
+    {
+      "name": "github-management",
+      "stars": 3,
+      "forks": 0,
+      "clones14d": 12
+    },
+    {
+      "name": "Github-Homepage-Setup-Guide",
+      "stars": 1,
+      "forks": 0,
+      "clones14d": 8
+    },
+    {
+      "name": "fpga-assets",
+      "stars": 1,
+      "forks": 0,
+      "clones14d": 8
+    },
+    {
+      "name": "vcs-verdi-developer",
+      "stars": 6,
+      "forks": 0,
+      "clones14d": 12
+    }
+  ]
+}

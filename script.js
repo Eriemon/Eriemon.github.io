@@ -115,3 +115,47 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+// Refresh GitHub metrics from the generated data file while keeping HTML fallbacks usable.
+async function loadGithubProjectMetrics() {
+    try {
+        const response = await fetch('data/github-projects.json', { cache: 'no-store' });
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+        }
+
+        const data = await response.json();
+        const summary = data.summary || {};
+
+        ['projects', 'repositories', 'stars'].forEach(statName => {
+            const statElement = document.querySelector(`[data-stat="${statName}"]`);
+            const value = summary[statName];
+            if (statElement && Number.isFinite(value)) {
+                statElement.textContent = String(value);
+            }
+        });
+
+        (data.projects || []).forEach(project => {
+            if (!project || !project.name) {
+                return;
+            }
+
+            const card = document.querySelector(`[data-project="${project.name}"]`);
+            if (!card) {
+                return;
+            }
+
+            ['stars', 'forks', 'clones14d'].forEach(metricName => {
+                const metricElement = card.querySelector(`[data-metric="${metricName}"]`);
+                const value = project[metricName];
+                if (metricElement && Number.isFinite(value)) {
+                    metricElement.textContent = String(value);
+                }
+            });
+        });
+    } catch (error) {
+        console.warn('Unable to load GitHub project metrics; using HTML fallback values.', error);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', loadGithubProjectMetrics);

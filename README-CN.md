@@ -19,7 +19,7 @@
 
 ## 项目简介
 
-本仓库用于维护 [Eriemon.github.io](https://Eriemon.github.io)，即 Jiyuan Liu 的个人学术主页。主页展示高性能计算与 FPGA 加速器设计相关研究方向、11 篇学术论文，以及一个 GitHub 项目概览区：当前展示全部 9 个公开仓库，并为每个仓库显示星标、Fork 和近 14 天克隆次数。
+本仓库用于维护 [Eriemon.github.io](https://Eriemon.github.io)，即 Jiyuan Liu 的个人学术主页。主页展示高性能计算与 FPGA 加速器设计相关研究方向、14 篇学术论文，以及一个 GitHub 项目概览区：当前展示全部 9 个公开仓库，累计 247 个 Stars，并为每个仓库显示星标、Fork 和保留的近 14 天克隆次数。
 
 站点采用纯静态实现：只包含 HTML、CSS 和 JavaScript，便于审阅、维护和通过 GitHub Pages 直接部署。
 
@@ -37,8 +37,8 @@
 | 模块 | 内容 |
 | --- | --- |
 | About | 研究简介、实验室信息、编程语言和技术技能。 |
-| Publications | 11 篇学术论文，包括 DAC 2026 论文亮点。 |
-| Projects | 当前全部 9 个公开仓库，并在每张卡片中展示 Stars、Forks 和 14 天 Clones 指标。 |
+| Publications | 14 篇学术论文，DAC 2026 论文固定置顶，其余条目按 ORCID 同步生成。 |
+| Projects | 当前全部 9 个公开仓库，并在每张卡片中展示 Stars、Forks 和保留的 14 天 Clones 指标。 |
 | News | QCDAC 2026 浙江宁波会议、DAC 2026、FPT 2026、HIQC Lab 招生和 Integration 论文动态。 |
 | Experience | 教育经历与科研/工作经历时间线。 |
 | Contact | 邮箱、GitHub、ORCID、Google Scholar 等公开联系方式。 |
@@ -52,6 +52,7 @@
 | `style-academic.css` | 可切换的 Academic 视觉风格。 |
 | `script.js` | 主题、风格、语言切换与滚动动画等交互逻辑。 |
 | `dac2026.html` | DAC 2026 论文详情页。 |
+| `scripts/sync_homepage_data.py` | 同步 GitHub 指标、重建基于 ORCID 的论文列表，并更新 README 中的数量描述。 |
 | `images/` | 站点使用的个人照片与研究图片。 |
 
 ## 本地预览
@@ -73,6 +74,24 @@ http://127.0.0.1:8765/
 ```powershell
 git diff --check
 ```
+
+## 维护方式
+
+使用以下命令刷新主页数据：
+
+```powershell
+python scripts/sync_homepage_data.py
+```
+
+数据来源：
+
+- GitHub 官方公开 API：同步仓库数、Stars 和 Forks。
+- ORCID 官方公开 API：同步论文标题、作者、期刊/会议信息与 DOI 链接。
+
+说明：
+
+- Clones (14d) 指标保留现有值，不在无 Token 模式下自动同步。
+- DAC 2026 论文卡片固定置顶，排在 ORCID 生成列表之前。
 
 ## 部署方式
 

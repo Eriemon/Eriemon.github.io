@@ -2,24 +2,24 @@
   "summary": {
     "projects": 9,
     "repositories": 9,
-    "stars": 228
+    "stars": 247
   },
   "projects": [
     {
       "name": "verilog-generator",
-      "stars": 169,
-      "forks": 5,
+      "stars": 185,
+      "forks": 9,
       "clones14d": 148
     },
     {
       "name": "hls-generator",
-      "stars": 18,
+      "stars": 20,
       "forks": 3,
       "clones14d": 22
     },
     {
       "name": "remote-ssh",
-      "stars": 13,
+      "stars": 14,
       "forks": 2,
       "clones14d": 54
     },

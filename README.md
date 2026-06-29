@@ -19,7 +19,7 @@
 
 ## Overview
 
-This repository powers [Eriemon.github.io](https://Eriemon.github.io), the personal academic homepage of Jiyuan Liu, a PhD student at Southeast University. The site presents research interests in high performance computing and FPGA accelerator design, 11 publications, and a GitHub project snapshot that currently shows all 9 public repositories together with stars, forks, and 14-day clone counts.
+This repository powers [Eriemon.github.io](https://Eriemon.github.io), the personal academic homepage of Jiyuan Liu, a PhD student at Southeast University. The site presents research interests in high performance computing and FPGA accelerator design, 14 publications, and a GitHub project snapshot that currently shows all 9 public repositories with 247 total stars together with per-card stars, forks, and preserved 14-day clone counts.
 
 The site is intentionally static: it uses plain HTML, CSS, and JavaScript so it can be reviewed easily, deployed through GitHub Pages, and maintained without a build system.
 
@@ -37,8 +37,8 @@ The site is intentionally static: it uses plain HTML, CSS, and JavaScript so it 
 | Section | Purpose |
 | --- | --- |
 | About | Research profile, lab affiliation, programming languages, and technical skills. |
-| Publications | 11 academic publications, including the DAC 2026 paper highlight. |
-| Projects | All 9 public repositories, with per-card Stars, Forks, and Clones (14d) metrics. |
+| Publications | 14 academic publications, with the DAC 2026 paper pinned ahead of the ORCID-synced list. |
+| Projects | All 9 public repositories, with per-card Stars, Forks, and preserved Clones (14d) values. |
 | News | Recent academic updates, including QCDAC 2026 in Ningbo, DAC 2026, FPT 2026, HIQC Lab recruitment, and Integration. |
 | Experience | Education and research/work experience timeline. |
 | Contact | Email, GitHub, ORCID, Google Scholar, and related academic links. |
@@ -52,6 +52,7 @@ The site is intentionally static: it uses plain HTML, CSS, and JavaScript so it 
 | `style-academic.css` | Alternative Academic visual system. |
 | `script.js` | Theme/style/language toggles, scroll animation, and UI behavior. |
 | `dac2026.html` | Dedicated DAC 2026 paper detail page. |
+| `scripts/sync_homepage_data.py` | Refreshes GitHub metrics, rebuilds the ORCID-driven publication list, and updates README count text. |
 | `images/` | Local profile and research images used by the site. |
 
 ## Local Preview
@@ -73,6 +74,24 @@ Useful checks before publishing:
 ```powershell
 git diff --check
 ```
+
+## Maintenance
+
+Refresh homepage data with:
+
+```powershell
+python scripts/sync_homepage_data.py
+```
+
+Data sources:
+
+- GitHub public API for repository counts, stars, and forks.
+- ORCID public API for publication titles, authors, venues, and DOI links.
+
+Notes:
+
+- Clones (14d) values remain preserved from the existing tracked JSON and are not auto-synced.
+- The DAC 2026 highlight stays pinned ahead of the ORCID-generated list.
 
 ## Deployment
 

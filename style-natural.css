@@ -582,7 +582,7 @@ a:hover {
 
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: var(--space-lg);
 }
 
@@ -859,7 +859,7 @@ a:hover {
 
 .contact-content {
     text-align: center;
-    max-width: 650px;
+    max-width: 100%;
     margin: 0 auto;
 }
 

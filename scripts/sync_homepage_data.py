@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import re
+import subprocess
 import urllib.request
 from dataclasses import dataclass
 from html import escape
@@ -27,6 +28,7 @@ PUBLICATIONS_END_MARKER = "<!-- PUBLICATIONS-LIST:END -->"
 DAC_HIGHLIGHT_TITLE = "🏆 Optimized Time-dependent Hamiltonian Evolution Quantum Solver for Power System Transient Computations"
 
 VENUE_OVERRIDES_BY_TITLE = {
+    DAC_HIGHLIGHT_TITLE.removeprefix("🏆 "): "Design Automation Conference (DAC) 2026 • CCF-A Conference",
     "Acc-VQLS: Accelerated Variational Quantum Linear Solver for VSC Simulation": "ACM Transactions on Quantum Computing, 2026",
     "Design of A Universal LVDS-based 4K@60Hz Video Processing Development Platform": "CSTIC, 2026",
     "Fine-grained data integration for high throughput and bandwidth-efficient computation on FPGAs": "Integration, 2026",
@@ -67,6 +69,31 @@ class OrcidWork:
     doi_url: str
 
 
+# 用户确认的 FPT 2026 已接收论文；尚无公开 DOI/PDF。
+FIBO_WORK = OrcidWork(
+    title="Fibo: A Role-Orchestrated Agentic Reasoning Framework for Autonomous FPGA RTL Design",
+    authors=["Jiyuan Liu", "Fangtian Gu", "Yongming Tang", "He Li"],
+    venue="FPT 2026 · Accepted",
+    year=2026,
+    month=0,
+    day=0,
+    pdf_url="",
+    doi_url="",
+)
+
+
+# 用户补充的 ICCD 2026 论文；已接收；不推测 DOI 或 PDF。
+HIFA_WORK = OrcidWork(
+    title="HiFA: Hierarchical Data Integrated FPGA Accelerator for Block-wise Quantum Circuit Simulation",
+    authors=["Kai Chen", "Jiyuan Liu", "He Li"],
+    venue="ICCD 2026 · Accepted",
+    year=2026,
+    month=0,
+    day=0,
+    pdf_url="",
+    doi_url="",
+)
+
 def fetch_json(url: str, *, accept: str = "application/json") -> Any:
     """拉取公开 JSON 数据。"""
 
@@ -93,32 +120,25 @@ def write_text(path: Path, content: str) -> None:
     path.write_text(content, encoding="utf-8", newline="\n")
 
 
-def load_existing_project_state() -> tuple[list[str], dict[str, int]]:
-    """读取当前项目顺序和克隆次数保留值。"""
+def load_existing_project_state() -> list[str]:
+    """读取既有项目卡片的展示顺序。"""
 
     existing_data = json.loads(read_text(DATA_PATH))
-
-    # 保留当前 JSON 中项目卡片的顺序，避免同步脚本调整展示顺序。
-    project_order = [project["name"] for project in existing_data["projects"]]
-
-    # 保留当前 14 天克隆次数，避免为了该指标引入额外认证依赖。
-    preserved_clones = {
-        project["name"]: int(project["clones14d"])
-        for project in existing_data["projects"]
-    }
-
-    # 返回后续同步需要的展示顺序和克隆次数基线。
-    return project_order, preserved_clones
+    return [project["name"] for project in existing_data["projects"]]
 
 
 def build_github_projects_json() -> tuple[dict[str, Any], int]:
     """同步 GitHub 项目指标并生成 JSON 数据。"""
 
-    repos_payload = fetch_json(GITHUB_REPOS_URL)
-    project_order, preserved_clones = load_existing_project_state()
+    # gh 复用本机登录；不在源码或公开数据中保存凭据。
+    pages = json.loads(subprocess.check_output(
+        ["gh", "api", "--paginate", "--slurp", GITHUB_REPOS_URL], text=True, encoding="utf-8"
+    ))
+    repos_payload = [repo for page in pages for repo in page]
+    project_order = load_existing_project_state()
 
     # 只统计当前账号名下的非 fork 仓库。
-    owner_repos = [repo for repo in repos_payload if not repo.get("fork")]
+    owner_repos = [repo for repo in repos_payload if not repo.get("fork") and not repo.get("private")]
 
     # 为后续按既定顺序重排卡片数据建立名称索引。
     repo_by_name = {repo["name"]: repo for repo in owner_repos}
@@ -135,18 +155,21 @@ def build_github_projects_json() -> tuple[dict[str, Any], int]:
     for project_name in project_order:
         repo = repo_by_name[project_name]
 
-        # 为每张卡片记录公开可拉取的 stars、forks 与保留的 clones 值。
+        clones = json.loads(subprocess.check_output(
+            ["gh", "api", f"repos/Eriemon/{project_name}/traffic/clones"], text=True, encoding="utf-8"
+        ))
+        # 克隆数查询失败会中止同步，不将旧值冒充当前窗口。
         project_metrics = GithubProjectMetrics(
             name=project_name,
             stars=int(repo["stargazers_count"]),
             forks=int(repo["forks_count"]),
-            clones14d=preserved_clones[project_name],
+            clones14d=int(clones["count"]),
         )
         project_metrics_list.append(project_metrics)
 
     # 统计页面顶部使用的仓库数与总星标数。
     repositories_count = len(owner_repos)
-    stars_count = sum(project.stars for project in project_metrics_list)
+    stars_count = sum(int(repo["stargazers_count"]) for repo in owner_repos)
 
     # 组装写回前端读取的数据文件。
     github_projects_data = {
@@ -210,14 +233,12 @@ def build_orcid_doi_url(external_ids: list[dict[str, Any]]) -> str:
 
 
 def build_pdf_url(detail_payload: dict[str, Any], doi_url: str) -> str:
-    """按既定口径选择 PDF 按钮链接。"""
+    """仅保留明确的 PDF 地址，不将 DOI 或索引页误标为 PDF。"""
 
     raw_pdf_url = normalize_text((detail_payload.get("url") or {}).get("value"))
-    if raw_pdf_url:
+    if re.search(r"\.pdf(?:[?#]|$)|/doi/(?:e?pdf)/", raw_pdf_url, re.IGNORECASE):
         return raw_pdf_url
-
-    # 若 ORCID 未提供单独 URL，则回退到 DOI。
-    return doi_url
+    return ""
 
 
 def build_publication_venue(title: str, journal_title: str, year: int) -> str:
@@ -257,6 +278,7 @@ def build_orcid_works() -> list[OrcidWork]:
     works_payload = fetch_json(ORCID_WORKS_URL)
     works_group = works_payload.get("group") or []
     orcid_works: list[OrcidWork] = []
+    seen_dois: set[str] = set()
 
     # 逐个读取明细，补全作者、链接和期刊信息。
     for work_group in works_group:
@@ -293,11 +315,24 @@ def build_orcid_works() -> list[OrcidWork]:
             pdf_url=pdf_url,
             doi_url=doi_url,
         )
-        orcid_works.append(orcid_work)
+        doi_key = doi_url.lower().replace("http://", "https://").replace("dx.doi.org/", "doi.org/").rstrip("/")
+        if doi_key not in seen_dois:
+            orcid_works.append(orcid_work)
+            seen_dois.add(doi_key)
 
-    # 按发布时间倒序排序，保证最新成果优先显示。
+    for manual_work in (FIBO_WORK, HIFA_WORK):
+        if not any(normalize_text(work.title).casefold() == manual_work.title.casefold() for work in orcid_works):
+            orcid_works.append(manual_work)
+
+    # Fibo、HiFA、MSDF-BP、DAC 优先，其余保持日期倒序。
     orcid_works.sort(
-        key=lambda work: (work.year, work.month, work.day, work.title),
+        key=lambda work: (
+            normalize_text(work.title).casefold() == FIBO_WORK.title.casefold(),
+            normalize_text(work.title).casefold() == HIFA_WORK.title.casefold(),
+            work.title.startswith("MSDF-BP:"),
+            work.title == DAC_HIGHLIGHT_TITLE.removeprefix("🏆 "),
+            work.year, work.month, work.day, work.title,
+        ),
         reverse=True,
     )
 
@@ -331,6 +366,11 @@ def render_orcid_card(work: OrcidWork) -> str:
     venue_html = escape(work.venue)
     pdf_url = escape(work.pdf_url, quote=True)
     doi_url = escape(work.doi_url, quote=True)
+    links = []
+    if pdf_url:
+        links.append(f'<a href="{pdf_url}" class="pub-link" target="_blank" rel="noopener noreferrer">PDF</a>')
+    if doi_url:
+        links.append(f'<a href="{doi_url}" class="pub-link" target="_blank" rel="noopener noreferrer">DOI</a>')
 
     return f"""                <article class="pub-card" data-year="{work.year}">
                     <div class="pub-year">{work.year}</div>
@@ -338,8 +378,7 @@ def render_orcid_card(work: OrcidWork) -> str:
                         <div class="pub-header">
                             <h3 class="pub-title">{title_html}</h3>
                             <div class="pub-links">
-                                <a href="{pdf_url}" class="pub-link" target="_blank">PDF</a>
-                                <a href="{doi_url}" class="pub-link" target="_blank">DOI</a>
+                                {" ".join(links)}
                             </div>
                         </div>
                         <p class="pub-authors">{authors_html}</p>
@@ -348,38 +387,22 @@ def render_orcid_card(work: OrcidWork) -> str:
                 </article>"""
 
 
-def render_dac_highlight_card() -> str:
-    """渲染固定置顶的 DAC 亮点卡片。"""
+def render_dac_highlight_card(work: OrcidWork) -> str:
+    """复用普通卡片，保留 DAC 的详情页入口。"""
 
-    return """                <article class="pub-card" data-year="2026" style="border-left: 3px solid #667eea; background: linear-gradient(135deg, rgba(102,126,234,0.05) 0%, rgba(118,75,162,0.05) 100%);">
-                    <div class="pub-year">2026</div>
-                    <div class="pub-content">
-                        <div class="pub-header">
-                            <h3 class="pub-title">
-                                🏆 Optimized Time-dependent Hamiltonian Evolution Quantum Solver for Power System Transient Computations
-                            </h3>
-                            <div class="pub-links">
-                                <a href="dac2026.html" class="pub-link" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white !important;">Page</a>
-                                <a href="#contact" class="pub-link">PDF</a>
-                            </div>
-                        </div>
-                        <p class="pub-authors"><strong>Jiyuan Liu</strong>, Mengdi Sun, Yongming Tang, Baoping Wang, He Li</p>
-                        <p class="pub-venue">Design Automation Conference (DAC) 2026 • CCF-A Conference</p>
-                    </div>
-                </article>"""
+    card = render_orcid_card(work)
+    return card.replace('<div class="pub-links">', '<div class="pub-links"><a href="dac2026.html" class="pub-link">Page</a>', 1)
 
 
 def render_publications_block(orcid_works: list[OrcidWork]) -> str:
-    """生成 Publications 区块的完整受管内容。"""
+    """每篇论文只渲染一次，保留已排序的 Fibo、HiFA、MSDF-BP、DAC 优先顺序。"""
 
-    cards_html = [render_dac_highlight_card()]
-
-    # 在置顶 DAC 卡片之后追加按时间倒序的 ORCID 条目。
-    for work in orcid_works:
-        cards_html.append(render_orcid_card(work))
-
-    # 返回受管区块内部要替换的 HTML 内容。
-    return "\n\n".join(cards_html)
+    cards = "\n\n".join(
+        render_dac_highlight_card(work)
+        if work.title == DAC_HIGHLIGHT_TITLE.removeprefix("🏆 ") else render_orcid_card(work)
+        for work in orcid_works
+    )
+    return cards.replace('class="pub-card"', 'class="pub-card" style="border-left: 3px solid #667eea;"', 1)
 
 
 def replace_between_markers(source_text: str, replacement_body: str) -> str:
@@ -459,11 +482,11 @@ def update_project_card_fallbacks(index_html: str, github_projects_data: dict[st
     return index_html
 
 
-def update_index_html(github_projects_data: dict[str, Any], orcid_works: list[OrcidWork]) -> None:
+def update_index_html(github_projects_data: dict[str, Any], orcid_works: list[OrcidWork]) -> str:
     """更新首页中的统计兜底值与论文区块。"""
 
     index_html = read_text(INDEX_PATH)
-    publications_count = len(orcid_works) + 1
+    publications_count = len(orcid_works)
     summary = github_projects_data["summary"]
 
     # 先更新顶部四个兜底数字。
@@ -478,7 +501,7 @@ def update_index_html(github_projects_data: dict[str, Any], orcid_works: list[Or
 
     # 清理替换过程中可能遗留的行尾空格，保证 diff 检查通过。
     index_html = re.sub(r"[ \t]+\n", "\n", index_html)
-    write_text(INDEX_PATH, index_html)
+    return index_html
 
 
 def ensure_readme_script_row(readme_text: str, row_text: str) -> str:
@@ -521,7 +544,7 @@ def ensure_readme_maintenance_section(
     )
 
 
-def update_readme_en(publications_count: int, repositories_count: int, stars_count: int) -> None:
+def update_readme_en(publications_count: int, repositories_count: int, stars_count: int) -> str:
     """更新英文 README 中的数量描述与维护说明。"""
 
     readme_text = read_text(README_EN_PATH)
@@ -533,22 +556,22 @@ def update_readme_en(publications_count: int, repositories_count: int, stars_cou
     overview_replacement = (
         "This repository powers [Eriemon.github.io](https://Eriemon.github.io), "
         "the personal academic homepage of Jiyuan Liu, a PhD student at Southeast University. "
-        f"The site presents research interests in high performance computing and FPGA accelerator design, "
-        f"{publications_count} publications, and a GitHub project snapshot that currently shows all "
+        f"The site presents research interests in AI–Quantum–FPGA Collaborative Computing, "
+        f"{publications_count} publications including accepted papers, and a GitHub project snapshot of selected projects from "
         f"{repositories_count} public repositories with {stars_count} total stars together with per-card stars, forks, "
-        "and preserved 14-day clone counts."
+        "and current 14-day clone counts."
     )
     readme_text = overview_pattern.sub(overview_replacement, readme_text, count=1)
 
     readme_text = re.sub(
         r"\| Publications \| .*? \|",
-        f"| Publications | {publications_count} academic publications, with the DAC 2026 paper pinned ahead of the ORCID-synced list. |",
+        f"| Publications | {publications_count} academic publications, including Fibo (FPT 2026, Accepted), followed by HiFA (ICCD 2026, Accepted), MSDF-BP (ITC-Asia 2026), DAC 2026 and the remaining ORCID works. |",
         readme_text,
         count=1,
     )
     readme_text = re.sub(
         r"\| Projects \| .*? \|",
-        f"| Projects | All {repositories_count} public repositories, with per-card Stars, Forks, and preserved Clones (14d) values. |",
+        f"| Projects | Selected project cards; {repositories_count} public non-fork repositories in total. Stars, Forks, and Clones (14d) are refreshed. |",
         readme_text,
         count=1,
     )
@@ -567,8 +590,8 @@ def update_readme_en(publications_count: int, repositories_count: int, stars_cou
         "- GitHub public API for repository counts, stars, and forks.\n"
         "- ORCID public API for publication titles, authors, venues, and DOI links.\n\n"
         "Notes:\n\n"
-        "- Clones (14d) values remain preserved from the existing tracked JSON and are not auto-synced.\n"
-        "- The DAC 2026 highlight stays pinned ahead of the ORCID-generated list."
+        "- Requires authenticated gh CLI access for repository traffic. Clones (14d) values are refreshed; total Stars include all public non-fork repositories.\n"
+        "- Fibo (FPT 2026, Accepted) and HiFA (ICCD 2026) are manually supplemented until ORCID contains them; Fibo, HiFA, MSDF-BP, and DAC precede the remaining works. All content is rendered before writing files."
     )
     readme_text = ensure_readme_maintenance_section(
         readme_text,
@@ -577,10 +600,10 @@ def update_readme_en(publications_count: int, repositories_count: int, stars_cou
         "## Deployment",
     )
 
-    write_text(README_EN_PATH, readme_text)
+    return readme_text
 
 
-def update_readme_cn(publications_count: int, repositories_count: int, stars_count: int) -> None:
+def update_readme_cn(publications_count: int, repositories_count: int, stars_count: int) -> str:
     """更新中文 README 中的数量描述与维护说明。"""
 
     readme_text = read_text(README_CN_PATH)
@@ -591,21 +614,21 @@ def update_readme_cn(publications_count: int, repositories_count: int, stars_cou
     )
     overview_replacement = (
         "本仓库用于维护 [Eriemon.github.io](https://Eriemon.github.io)，即 Jiyuan Liu 的个人学术主页。"
-        f"主页展示高性能计算与 FPGA 加速器设计相关研究方向、{publications_count} 篇学术论文，"
-        f"以及一个 GitHub 项目概览区：当前展示全部 {repositories_count} 个公开仓库，累计 {stars_count} 个 Stars，"
-        "并为每个仓库显示星标、Fork 和保留的近 14 天克隆次数。"
+        f"主页展示 AI-量子-FPGA协同计算研究方向、{publications_count} 项论文（含已接收论文），"
+        f"以及一个 GitHub 项目概览区：展示精选项目，全部 {repositories_count} 个公开非 Fork 仓库累计 {stars_count} 个 Stars，"
+        "并为每个仓库显示星标、Fork 和当前近 14 天克隆次数。"
     )
     readme_text = overview_pattern.sub(overview_replacement, readme_text, count=1)
 
     readme_text = re.sub(
         r"\| Publications \| .*? \|",
-        f"| Publications | {publications_count} 篇学术论文，DAC 2026 论文固定置顶，其余条目按 ORCID 同步生成。 |",
+        f"| Publications | {publications_count} 篇学术论文，Fibo（FPT 2026，已接收）居首，HiFA（ICCD 2026，已接收）第二，MSDF-BP（ITC-Asia 2026）第三，DAC 2026 第四，其余条目按 ORCID 同步生成。 |",
         readme_text,
         count=1,
     )
     readme_text = re.sub(
         r"\| Projects \| .*? \|",
-        f"| Projects | 当前全部 {repositories_count} 个公开仓库，并在每张卡片中展示 Stars、Forks 和保留的 14 天 Clones 指标。 |",
+        f"| Projects | 展示精选项目；全部公开非 Fork 仓库共 {repositories_count} 个，刷新卡片 Stars、Forks 和 14 天 Clones 指标。 |",
         readme_text,
         count=1,
     )
@@ -624,8 +647,8 @@ def update_readme_cn(publications_count: int, repositories_count: int, stars_cou
         "- GitHub 官方公开 API：同步仓库数、Stars 和 Forks。\n"
         "- ORCID 官方公开 API：同步论文标题、作者、期刊/会议信息与 DOI 链接。\n\n"
         "说明：\n\n"
-        "- Clones (14d) 指标保留现有值，不在无 Token 模式下自动同步。\n"
-        "- DAC 2026 论文卡片固定置顶，排在 ORCID 生成列表之前。"
+        "- 需要已登录且可读取仓库流量的 gh CLI。刷新 Clones (14d)，总 Stars 包含全部公开非 Fork 仓库。\n"
+        "- Fibo（FPT 2026，已接收）、HiFA（ICCD 2026）在 ORCID 收录前人工补录；Fibo、HiFA、MSDF-BP、DAC 优先，其余按日期倒序。全部渲染成功后才写文件。"
     )
     readme_text = ensure_readme_maintenance_section(
         readme_text,
@@ -634,7 +657,7 @@ def update_readme_cn(publications_count: int, repositories_count: int, stars_cou
         "## 部署方式",
     )
 
-    write_text(README_CN_PATH, readme_text)
+    return readme_text
 
 
 def write_github_projects_json(github_projects_data: dict[str, Any]) -> None:
@@ -650,14 +673,18 @@ def main() -> int:
     github_projects_data, repositories_count = build_github_projects_json()
     orcid_works = build_orcid_works()
 
-    write_github_projects_json(github_projects_data)
-    update_index_html(github_projects_data, orcid_works)
+    index_html = update_index_html(github_projects_data, orcid_works)
 
-    publications_count = len(orcid_works) + 1
+    publications_count = len(orcid_works)
     stars_count = int(github_projects_data["summary"]["stars"])
 
-    update_readme_en(publications_count, repositories_count, stars_count)
-    update_readme_cn(publications_count, repositories_count, stars_count)
+    readme_en = update_readme_en(publications_count, repositories_count, stars_count)
+    readme_cn = update_readme_cn(publications_count, repositories_count, stars_count)
+
+    write_github_projects_json(github_projects_data)
+    write_text(INDEX_PATH, index_html)
+    write_text(README_EN_PATH, readme_en)
+    write_text(README_CN_PATH, readme_cn)
 
     # 用简短状态输出来汇报同步结果。
     print(f"> INFO: [Python] 已刷新 GitHub 指标文件：{DATA_PATH}")

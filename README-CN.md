@@ -19,7 +19,7 @@
 
 ## 项目简介
 
-本仓库用于维护 [Eriemon.github.io](https://Eriemon.github.io)，即 Jiyuan Liu 的个人学术主页。主页展示高性能计算与 FPGA 加速器设计相关研究方向、14 篇学术论文，以及一个 GitHub 项目概览区：当前展示全部 9 个公开仓库，累计 247 个 Stars，并为每个仓库显示星标、Fork 和保留的近 14 天克隆次数。
+本仓库用于维护 [Eriemon.github.io](https://Eriemon.github.io)，即 Jiyuan Liu 的个人学术主页。主页展示 AI-量子-FPGA协同计算研究方向、19 项论文（含已接收论文），以及一个 GitHub 项目概览区：展示精选项目，全部 10 个公开非 Fork 仓库累计 422 个 Stars，并为每个仓库显示星标、Fork 和当前近 14 天克隆次数。
 
 站点采用纯静态实现：只包含 HTML、CSS 和 JavaScript，便于审阅、维护和通过 GitHub Pages 直接部署。
 
@@ -37,11 +37,11 @@
 | 模块 | 内容 |
 | --- | --- |
 | About | 研究简介、实验室信息、编程语言和技术技能。 |
-| Publications | 14 篇学术论文，DAC 2026 论文固定置顶，其余条目按 ORCID 同步生成。 |
-| Projects | 当前全部 9 个公开仓库，并在每张卡片中展示 Stars、Forks 和保留的 14 天 Clones 指标。 |
-| News | QCDAC 2026 浙江宁波会议、DAC 2026、FPT 2026、HIQC Lab 招生和 Integration 论文动态。 |
+| Publications | 19 篇学术论文，Fibo（FPT 2026，已接收）居首，HiFA（ICCD 2026，已接收）第二，MSDF-BP（ITC-Asia 2026）第三，DAC 2026 第四，其余条目按 ORCID 同步生成。 |
+| Projects | 展示精选项目；全部公开非 Fork 仓库共 10 个，刷新卡片 Stars、Forks 和 14 天 Clones 指标。 |
+| News | 2026年12月FPT受邀报告、11月ICCD、7月DAC与CCF Chip报告，以及原有新闻。 |
 | Experience | 教育经历与科研/工作经历时间线。 |
-| Contact | 邮箱、GitHub、ORCID、Google Scholar 等公开联系方式。 |
+| Contact | 邮箱、LinkedIn、GitHub、ORCID、Google Scholar 等公开联系方式。 |
 
 ## 项目结构
 
@@ -90,8 +90,8 @@ python scripts/sync_homepage_data.py
 
 说明：
 
-- Clones (14d) 指标保留现有值，不在无 Token 模式下自动同步。
-- DAC 2026 论文卡片固定置顶，排在 ORCID 生成列表之前。
+- 需要已登录且可读取仓库流量的 gh CLI。刷新 Clones (14d)，总 Stars 包含全部公开非 Fork 仓库。
+- Fibo（FPT 2026，已接收）、HiFA（ICCD 2026）在 ORCID 收录前人工补录；Fibo、HiFA、MSDF-BP、DAC 优先，其余按日期倒序。全部渲染成功后才写文件。
 
 ## 部署方式
 
@@ -104,6 +104,8 @@ python scripts/sync_homepage_data.py
 本仓库是公开静态主页。请不要提交私人草稿、访问令牌、本机路径、未公开个人信息，或不属于站点内容的生成文件。外部链接应指向可公开访问、适合访客查看的学术主页、项目页面或联系方式。
 
 ## 联系方式
+
+- LinkedIn：[Eriemon](https://www.linkedin.com/in/eriemon)
 
 - 邮箱：[erie@seu.edu.cn](mailto:erie@seu.edu.cn)
 - GitHub：[@Eriemon](https://github.com/Eriemon)

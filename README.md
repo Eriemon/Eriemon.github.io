@@ -19,7 +19,7 @@
 
 ## Overview
 
-This repository powers [Eriemon.github.io](https://Eriemon.github.io), the personal academic homepage of Jiyuan Liu, a PhD student at Southeast University. The site presents research interests in high performance computing and FPGA accelerator design, 14 publications, and a GitHub project snapshot that currently shows all 9 public repositories with 247 total stars together with per-card stars, forks, and preserved 14-day clone counts.
+This repository powers [Eriemon.github.io](https://Eriemon.github.io), the personal academic homepage of Jiyuan Liu, a PhD student at Southeast University. The site presents research interests in AI–Quantum–FPGA Collaborative Computing, 19 publications including accepted papers, and a GitHub project snapshot of selected projects from 10 public repositories with 422 total stars together with per-card stars, forks, and current 14-day clone counts.
 
 The site is intentionally static: it uses plain HTML, CSS, and JavaScript so it can be reviewed easily, deployed through GitHub Pages, and maintained without a build system.
 
@@ -37,11 +37,11 @@ The site is intentionally static: it uses plain HTML, CSS, and JavaScript so it 
 | Section | Purpose |
 | --- | --- |
 | About | Research profile, lab affiliation, programming languages, and technical skills. |
-| Publications | 14 academic publications, with the DAC 2026 paper pinned ahead of the ORCID-synced list. |
-| Projects | All 9 public repositories, with per-card Stars, Forks, and preserved Clones (14d) values. |
-| News | Recent academic updates, including QCDAC 2026 in Ningbo, DAC 2026, FPT 2026, HIQC Lab recruitment, and Integration. |
+| Publications | 19 academic publications, including Fibo (FPT 2026, Accepted), followed by HiFA (ICCD 2026, Accepted), MSDF-BP (ITC-Asia 2026), DAC 2026 and the remaining ORCID works. |
+| Projects | Selected project cards; 10 public non-fork repositories in total. Stars, Forks, and Clones (14d) are refreshed. |
+| News | FPT 2026 invited talk (December), ICCD 2026 (November), DAC and CCF Chip talks (July), followed by earlier news. |
 | Experience | Education and research/work experience timeline. |
-| Contact | Email, GitHub, ORCID, Google Scholar, and related academic links. |
+| Contact | Email, LinkedIn, GitHub, ORCID, and Google Scholar. |
 
 ## Project Map
 
@@ -90,8 +90,8 @@ Data sources:
 
 Notes:
 
-- Clones (14d) values remain preserved from the existing tracked JSON and are not auto-synced.
-- The DAC 2026 highlight stays pinned ahead of the ORCID-generated list.
+- Requires authenticated gh CLI access for repository traffic. Clones (14d) values are refreshed; total Stars include all public non-fork repositories.
+- Fibo (FPT 2026, Accepted) and HiFA (ICCD 2026) are manually supplemented until ORCID contains them; Fibo, HiFA, MSDF-BP, and DAC precede the remaining works. All content is rendered before writing files.
 
 ## Deployment
 
@@ -104,6 +104,8 @@ The site is designed for GitHub Pages and can be served directly from the reposi
 This repository is a public static homepage. Do not commit private drafts, access tokens, local machine paths, unpublished personal data, or generated files that are not part of the site. External links should point only to public academic, project, or contact pages that are intended for visitors.
 
 ## Contact
+
+- LinkedIn: [Eriemon](https://www.linkedin.com/in/eriemon)
 
 - Email: [erie@seu.edu.cn](mailto:erie@seu.edu.cn)
 - GitHub: [@Eriemon](https://github.com/Eriemon)

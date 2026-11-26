@@ -27,6 +27,9 @@ class HomepageSyncTests(unittest.TestCase):
         html = sync.render_orcid_card(fibo)
         self.assertNotIn('href=""', html)
         self.assertNotIn('>PDF<', html)
+        page = 'href="fibo-fpt2026.html"'
+        self.assertEqual(html.count(page), 1)
+        self.assertTrue((ROOT / "fibo-fpt2026.html").is_file())
         detail = {
             "title": {"title": {"value": fibo.title}},
             "contributors": {"contributor": [{"credit-name": {"value": a}} for a in fibo.authors]},
@@ -38,6 +41,7 @@ class HomepageSyncTests(unittest.TestCase):
             works = sync.build_orcid_works()
         self.assertEqual(len(works), 2)
         self.assertEqual(works[0].doi_url, "https://doi.org/10.1/fibo")
+        self.assertEqual(sync.render_orcid_card(works[0]).count(page), 1)
 
     def test_hifa_is_between_fibo_and_dac_and_first_paper_has_blue_border(self):
         with patch.object(sync, "fetch_json", return_value={"group": []}):

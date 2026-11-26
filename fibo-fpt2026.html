@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fibo | FPT 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f9fafb;
+            --text-primary: #111827;
+            --text-secondary: #374151;
+            --accent-primary: #2563eb;
+            --border-color: #e5e7eb;
+        }
+        [data-theme="dark"] {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #242424;
+            --text-primary: #f5f5f5;
+            --text-secondary: #b0b0b0;
+            --border-color: #333333;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: var(--accent-primary);
+            text-decoration: none;
+        }
+        .back-link:hover { text-decoration: underline; }
+        .badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+        h1 { font-size: 1.75rem; margin-bottom: 1rem; line-height: 1.3; }
+        .authors { color: var(--text-secondary); margin-bottom: 1.5rem; }
+        .venue {
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-left: 4px solid var(--accent-primary);
+            margin-bottom: 2rem;
+        }
+        .abstract { margin-bottom: 2rem; }
+        .abstract h2 { font-size: 1.25rem; margin-bottom: 0.75rem; }
+        .abstract p { color: var(--text-secondary); }
+        .flowchart {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .flowchart img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+        .caption {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+        .theme-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-color);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        video { display: block; width: 100%; height: auto; background: #101010; border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">🌓 Theme</button>
+
+    <a href="index.html#publications" class="back-link">← Back to Homepage</a>
+
+    <span class="badge">FPT 2026 · Accepted</span>
+
+    <h1>Fibo: A Role-Orchestrated Agentic Reasoning Framework for Autonomous FPGA RTL Design</h1>
+
+    <p class="authors">
+        <strong>Jiyuan Liu</strong>, Fangtian Gu, Yongming Tang, He Li
+    </p>
+
+    <div class="venue">
+        <strong>International Conference on Field-Programmable Technology (FPT) 2026</strong><br>
+        Hawaii, USA
+    </div>
+
+    <div class="abstract">
+        <h2>Abstract</h2>
+        <p>
+            Large language models (LLMs) have been increasingly applied to register-transfer-level (RTL) code
+            generation and debugging for FPGA design. Existing agentic frameworks have obtained high functional
+            success rates on RTL benchmarks. However, difficult cases may still require repeated fix attempts
+            with substantial runtime and token consumption.
+        </p>
+        <p style="margin-top: 1rem;">
+            To address these issues, this paper presents Fibo, a role-orchestrated agentic reasoning framework
+            for FPGA RTL design. Fibo combines role-orchestrated candidate refinement, history-aware temporal
+            analysis, and budget-aware pipelined execution through an extensible plug-in architecture. Benchmark
+            results on the open-source VerilogEval datasets demonstrate that Fibo achieves at least 99.36%
+            pass@10 on all evaluated benchmarks and LLM-backbone configurations. Under the same Deepseek V4
+            Flash setting, Fibo achieves a pass@1 improvement of up to 6.73% and delivers up to 3.35× speedup
+            over the state-of-the-art work.
+        </p>
+    </div>
+
+    <div class="flowchart">
+        <a href="images/fibo-framework-overview.png" aria-label="View the full-size Fibo framework diagram">
+            <img src="images/fibo-framework-overview.png" width="2201" height="588" alt="Fibo workflow for RTL planning, candidate refinement, EDA evaluation and feedback">
+        </a>
+        <p class="caption">Figure: Overview of the proposed Fibo framework for autonomous FPGA RTL design. The workflow coordinates role-orchestrated planning and RTL refinement with EDA evaluation, top-n shared analysis, top-1 parent selection, and budget-aware termination.</p>
+    </div>
+
+    <section aria-labelledby="video-title">
+        <h2 id="video-title">Presentation video</h2>
+        <video controls playsinline preload="none" width="1920" height="1080"
+               aria-labelledby="video-title" src="videos/Fibo-FPT26.mp4">
+            <a href="videos/Fibo-FPT26.mp4">Open the presentation video</a>
+        </video>
+    </section>
+
+    <div class="venue" style="margin-top: 2rem;">
+        <strong id="affiliations-title">Affiliations:</strong><br>
+        School of Electronic Science and Engineering, Southeast University, Nanjing, China<br>
+        First author: Jiyuan Liu (PhD Student)<br>
+        Corresponding author: Prof. He Li<br>
+        Co-authors: Fangtian Gu and Yongming Tang
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            html.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+            localStorage.setItem('theme', html.getAttribute('data-theme'));
+        }
+
+        // Load saved theme
+        const saved = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', saved);
+    </script>
+</body>
+</html>

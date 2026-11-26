@@ -367,6 +367,8 @@ def render_orcid_card(work: OrcidWork) -> str:
     pdf_url = escape(work.pdf_url, quote=True)
     doi_url = escape(work.doi_url, quote=True)
     links = []
+    if normalize_text(work.title).casefold() == FIBO_WORK.title.casefold():
+        links.append('<a href="fibo-fpt2026.html" class="pub-link">Page</a>')
     if pdf_url:
         links.append(f'<a href="{pdf_url}" class="pub-link" target="_blank" rel="noopener noreferrer">PDF</a>')
     if doi_url:

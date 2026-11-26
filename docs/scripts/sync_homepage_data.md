@@ -28,3 +28,5 @@ API 或模板渲染失败在写入前终止，保留现有文件；不声称多�
 ## 后续内容修订
 
 HiFA 已由用户确认 Accepted；MSDF-BP 使用 ORCID 正式元数据，不新增人工论文副本。排序固定 Fibo、HiFA、MSDF-BP、DAC，其余日期倒序。项目展示顺序取自缩减后的六项 JSON 清单；总仓库与总 Stars 口径保持不变。
+
+`render_orcid_card()` 按规范化标题匹配 `FIBO_WORK.title` 后生成 Fibo 的 Page 链接，人工补录与 ORCID 记录共用该逻辑。

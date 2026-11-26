@@ -29,3 +29,5 @@ Contact 桌面端四个链接同行；四条新增 News 的会议名和报告主
 HiFA（ICCD 2026）状态为 Accepted。MSDF-BP 从 ORCID 234086832 获取，DOI 为 10.1109/itc-asia71864.2026.11710883。首四篇固定 Fibo、HiFA、MSDF-BP、DAC。移除主页仓库、github-management、搭建指南三张项目卡片，保留六张，桌面三列两行；总仓库数和总 Stars 仍按全部公开非 Fork 仓库计算。
 
 本轮验收：真实同步19项论文、6张项目卡片；7项回归通过。浏览器确认 HiFA Accepted、MSDF-BP 作者及 DOI 元数据、首四篇顺序；1024/1440px 两种风格均两行，390px 无横向溢出。
+
+Fibo 的 Page 入口位于首篇论文卡片，链接至 `fibo-fpt2026.html`。返回链接直接定位到首页论文区。

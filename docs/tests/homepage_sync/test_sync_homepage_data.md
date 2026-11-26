@@ -9,3 +9,5 @@
 新增回归：HiFA 作者和会议正确，排在 Fibo 之后；蓝线只在首篇。手工正文保留比较统一换行符，兼容 Windows CRLF。
 
 新增 ORCID MSDF-BP 排序回归：Fibo、HiFA、MSDF-BP、DAC；HiFA 会议字段包含 Accepted。
+
+已有 Fibo 补录与合并测试同时检查两种数据来源各生成一个 Page 链接，并验证目标 HTML 文件存在。
